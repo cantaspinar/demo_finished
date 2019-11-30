@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sepet_demo/MyTheme.dart';
 import 'package:sepet_demo/MyCart.dart';
+import 'package:badges/badges.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,17 +53,31 @@ class Store extends StatelessWidget {
           },
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return ShoppingCart();
-                }),
-              );
-            },
-          )
+          Badge(
+            shape: BadgeShape.circle,
+            borderRadius: 100,
+            position: BadgePosition.topLeft(
+              top: -4,
+              left: 0,
+            ),
+            animationDuration: Duration(milliseconds: 300),
+            animationType: BadgeAnimationType.scale,
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ShoppingCart();
+                  }),
+                );
+              },
+            ),
+            badgeContent: Text(
+              myCart.list.length.toString(),
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ],
       ),
       body: ListView.builder(
